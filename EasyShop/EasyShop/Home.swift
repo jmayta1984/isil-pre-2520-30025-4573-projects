@@ -29,7 +29,7 @@ struct Home: View {
                         .foregroundStyle(.secondary)
                     Text("Good morning!")
                         .font(.headline)
-        
+                    
                 }
                 Spacer()
                 IconBadge(name: "bell")
@@ -50,7 +50,7 @@ struct Home: View {
                 IconBadge(name: "slider.vertical.3")
             }
             .padding(.horizontal, 8)
-           
+            
             HStack {
                 Text("Categories")
                     .font(.title3)
@@ -82,15 +82,17 @@ struct Home: View {
             HStack {
                 VStack {
                     Text("Get your special sale up to 40%")
+                        .foregroundStyle(.background)
                         .font(.title2)
                         .bold()
-                        .padding(.horizontal)
+                        .padding(.horizontal,32)
+                    
                     Button(action: {}) {
                         Text("Shop now")
                             .padding()
                             .background(.background, in:
                                             RoundedRectangle(cornerRadius: 16))
-                            
+                        
                     }
                 }
                 
@@ -101,7 +103,8 @@ struct Home: View {
             }
             .frame(height: 192)
             .clipped()
-            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16))
+            .background(
+                LinearGradient(colors: [.blue, .blue.opacity(0.4)], startPoint: .topLeading, endPoint: .bottomTrailing), in: RoundedRectangle(cornerRadius: 16))
             .padding(.horizontal,8)
             Spacer()
         }

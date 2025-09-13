@@ -79,10 +79,30 @@ struct Home: View {
             }
             .padding(.horizontal, 8)
             
-            Image("banner")
-                .frame(maxWidth: .infinity)
-                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16))
-                .padding(.horizontal,8)
+            HStack {
+                VStack {
+                    Text("Get your special sale up to 40%")
+                        .font(.title2)
+                        .bold()
+                        .padding(.horizontal)
+                    Button(action: {}) {
+                        Text("Shop now")
+                            .padding()
+                            .background(.background, in:
+                                            RoundedRectangle(cornerRadius: 16))
+                            
+                    }
+                }
+                
+                Image("banner")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(maxWidth: .infinity)
+            }
+            .frame(height: 192)
+            .clipped()
+            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16))
+            .padding(.horizontal,8)
             Spacer()
         }
     }

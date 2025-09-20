@@ -35,23 +35,3 @@ struct ProductCard: View {
         }
     }
 }
-
-#Preview {
-    
-    ScrollView(.vertical) {
-        
-    
-        LazyVGrid(columns: [
-            GridItem(.flexible()),
-            GridItem(.flexible())
-        ]) {
-            ForEach(products) { product in
-                ProductCard(product: product)
-                    .background(.ultraThinMaterial)
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
-            }
-        }
-       
-    }
-    
-}

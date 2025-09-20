@@ -1,5 +1,5 @@
 //
-//  Main.swift
+//  MainView.swift
 //  EasyShop
 //
 //  Created by Alumno on 5/09/25.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct Main: View {
+struct MainView: View {
     var body: some View {
         TabView {
             Tab("Home", systemImage: "house") {
-                Home()
+                HomeView()
             }
             
             Tab("Favorites", systemImage: "heart") {
@@ -26,9 +26,10 @@ struct Main: View {
                 
             }
         }
+        .tint(.primary)
     }
 }
 
 #Preview {
-    Main()
+    MainView()
 }

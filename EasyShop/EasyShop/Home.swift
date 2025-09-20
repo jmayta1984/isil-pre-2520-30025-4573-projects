@@ -11,131 +11,140 @@ struct Home: View {
     
     @State var search = ""
     @State var selectedCategory: Category = .all
+    @State var selectedProduct: Product? = nil
     
     var body: some View {
-        VStack {
-            HStack {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(.blue)
-                        .frame(width: 48, height: 48)
-                    Image(systemName: "person.crop.circle.fill")
-                        .font(.title)
-                        .foregroundStyle(.white)
-                }
-                VStack(alignment: .leading) {
-                    Text("Hello Alex")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                    Text("Good morning!")
-                        .font(.headline)
-                    
-                }
-                Spacer()
-                RoundedIcon(name: "bell") { }
-                RoundedIcon(name: "cart") { }
-            }
-            .padding(.horizontal, 8)
-            
-            HStack {
-                HStack{
-                    Image(systemName: "magnifyingglass")
-                        .foregroundStyle(.gray)
-                    TextField("Search", text: $search)
-                }
-                .padding()
-                .background(.gray.opacity(0.1))
-                .clipShape(RoundedRectangle(cornerRadius: 16))
-                
-                RoundedIcon(name: "slider.vertical.3"){ }
-            }
-            .padding(.horizontal, 8)
-            
-            ScrollView(.vertical){
+        NavigationStack {
+            VStack {
                 HStack {
-                    Text("Categories")
-                        .font(.title3)
-                        .bold()
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(.blue)
+                            .frame(width: 48, height: 48)
+                        Image(systemName: "person.crop.circle.fill")
+                            .font(.title)
+                            .foregroundStyle(.white)
+                    }
+                    VStack(alignment: .leading) {
+                        Text("Hello Alex")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                        Text("Good morning!")
+                            .font(.headline)
+                        
+                    }
                     Spacer()
-                    Text("See all")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                    RoundedIcon(name: "bell") { }
+                    RoundedIcon(name: "cart") { }
                 }
-                .padding(.top, 16)
                 .padding(.horizontal, 8)
                 
-                ScrollView (.horizontal){
+                HStack {
+                    HStack{
+                        Image(systemName: "magnifyingglass")
+                            .foregroundStyle(.gray)
+                        TextField("Search", text: $search)
+                    }
+                    .padding()
+                    .background(.gray.opacity(0.1))
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    
+                    RoundedIcon(name: "slider.vertical.3"){ }
+                }
+                .padding(.horizontal, 8)
+                
+                ScrollView(.vertical){
                     HStack {
-                        ForEach(Category.allCases, id: \.self) { category in
-                            CategoryPill(
-                                name: category.rawValue,
-                                isSelected: selectedCategory == category
-                            )
-                            .onTapGesture {
-                                selectedCategory = category
+                        Text("Categories")
+                            .font(.title3)
+                            .bold()
+                        Spacer()
+                        Text("See all")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(.top, 16)
+                    .padding(.horizontal, 8)
+                    
+                    ScrollView (.horizontal){
+                        HStack {
+                            ForEach(Category.allCases, id: \.self) { category in
+                                CategoryPill(
+                                    name: category.rawValue,
+                                    isSelected: selectedCategory == category
+                                )
+                                .onTapGesture {
+                                    selectedCategory = category
+                                }
+                            }
+                            
+                        }
+                        .padding(.horizontal, 8)
+                        
+                    }
+                    .padding(.bottom)
+                    
+                    HStack {
+                        VStack {
+                            Text("Get your special sale up to 40%")
+                                .foregroundStyle(.background)
+                                .font(.title2)
+                                .bold()
+                                .padding(.horizontal,32)
+                            
+                            Button(action: {}) {
+                                Text("Shop now")
+                                    .padding(.vertical,12)
+                                    .padding(.horizontal)
+                                    .background(.background, in:
+                                                    RoundedRectangle(cornerRadius: 16))
+                                
                             }
                         }
                         
+                        Image("banner")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(maxWidth: .infinity)
                     }
-                    .padding(.horizontal, 8)
-
-                }
-                .padding(.bottom)
-                
-                HStack {
-                    VStack {
-                        Text("Get your special sale up to 40%")
-                            .foregroundStyle(.background)
-                            .font(.title2)
+                    .frame(height: 192)
+                    .background(
+                        LinearGradient(colors: [.blue, .blue.opacity(0.4)], startPoint: .topLeading, endPoint: .bottomTrailing))
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
+                    
+                    .padding(.horizontal,8)
+                    
+                    HStack {
+                        Text("Popular")
+                            .font(.title3)
                             .bold()
-                            .padding(.horizontal,32)
-                        
-                        Button(action: {}) {
-                            Text("Shop now")
-                                .padding(.vertical,12)
-                                .padding(.horizontal)
-                                .background(.background, in:
-                                                RoundedRectangle(cornerRadius: 16))
-                            
+                        Spacer()
+                        Text("See all")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(.top, 16)
+                    .padding(.horizontal, 8)
+                    
+                    LazyVGrid(columns: [
+                        GridItem(.flexible()),
+                        GridItem(.flexible())
+                    ]) {
+                        ForEach(products) { product in
+                            ProductCard(product: product)
+                                .background(.ultraThinMaterial)
+                                .clipShape(RoundedRectangle(cornerRadius: 16))
+                                .onTapGesture {
+                                    selectedProduct = product
+                                }
                         }
                     }
-                    
-                    Image("banner")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(maxWidth: .infinity)
                 }
-                .frame(height: 192)
-                .background(
-                    LinearGradient(colors: [.blue, .blue.opacity(0.4)], startPoint: .topLeading, endPoint: .bottomTrailing))
-                .clipShape(RoundedRectangle(cornerRadius: 16))
-
-                .padding(.horizontal,8)
                 
-                HStack {
-                    Text("Popular")
-                        .font(.title3)
-                        .bold()
-                    Spacer()
-                    Text("See all")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                }
-                .padding(.top, 16)
-                .padding(.horizontal, 8)
-                
-                LazyVGrid(columns: [
-                    GridItem(.flexible()),
-                    GridItem(.flexible())
-                ]) {
-                    ForEach(products) { product in
-                        ProductCard(product: product)
-                            .background(.ultraThinMaterial)
-                            .clipShape(RoundedRectangle(cornerRadius: 16))
-                    }
-                }
             }
-            
+            .navigationDestination(item: $selectedProduct) { product in
+                ProductDetail(product: product)
+            }
         }
     }
 }

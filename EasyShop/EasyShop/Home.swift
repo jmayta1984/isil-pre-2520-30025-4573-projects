@@ -32,8 +32,8 @@ struct Home: View {
                     
                 }
                 Spacer()
-                IconBadge(name: "bell")
-                IconBadge(name: "cart")
+                RoundedIcon(name: "bell") { }
+                RoundedIcon(name: "cart") { }
             }
             .padding(.horizontal, 8)
             
@@ -47,7 +47,7 @@ struct Home: View {
                 .background(.gray.opacity(0.1))
                 .clipShape(RoundedRectangle(cornerRadius: 16))
                 
-                IconBadge(name: "slider.vertical.3")
+                RoundedIcon(name: "slider.vertical.3"){ }
             }
             .padding(.horizontal, 8)
             
@@ -77,8 +77,9 @@ struct Home: View {
                         }
                         
                     }
+                    .padding(.horizontal, 8)
+
                 }
-                .padding(.horizontal, 8)
                 .padding(.bottom)
                 
                 HStack {
@@ -139,15 +140,7 @@ struct Home: View {
     }
 }
 
-struct IconBadge: View {
-    let name: String
-    
-    var body: some View {
-        Image(systemName: name)
-            .frame(width: 48, height: 48)
-            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16))
-    }
-}
+
 
 struct CategoryPill: View {
     let name: String

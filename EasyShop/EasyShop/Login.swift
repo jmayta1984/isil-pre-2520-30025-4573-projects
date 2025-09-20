@@ -52,13 +52,14 @@ struct Login: View {
                 Text("Sign in")
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(.blue)
+                    .background(.black)
                     .foregroundStyle(.white)
                     .clipShape(RoundedRectangle(cornerRadius: 16))
                     .padding(.horizontal, 8)
                 
             }
         }
+        .tint(.primary)
     }
 }
 

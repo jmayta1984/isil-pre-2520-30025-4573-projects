@@ -21,6 +21,8 @@ struct ProductCard: View {
                 
             }) {
                 ProgressView()
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 160)
             }
             VStack (alignment: .leading){
                 Text(product.name)

@@ -10,6 +10,10 @@ import SwiftUI
 struct ProductDetail: View {
     let product: Product
     
+    @StateObject var viewModel = ProductDetailViewModel()
+    
+    @State var isFavorite = false
+    
     var body: some View {
         VStack {
             ScrollView(.vertical) {
@@ -29,12 +33,18 @@ struct ProductDetail: View {
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 256)
                         }
-                    Image(systemName: "heart")
-                        .font(.title2)
-                        .padding(8)
-                        .background(.background)
-                        .clipShape(Circle())
-                        .padding(8)
+                    Button {
+                        isFavorite.toggle()
+                    } label: {
+                        Image(systemName: isFavorite ? "heart.fill" : "heart")
+                            .font(.title2)
+                            .padding(8)
+                            .background(.background)
+                            .clipShape(Circle())
+                            .padding(8)
+                    }
+
+                    
 
                 }
                 .background(.ultraThinMaterial)
@@ -76,10 +86,18 @@ struct ProductDetail: View {
                     }
                     Spacer()
                     HStack {
-                        IconBadge(name: "minus")
-                        Text("1")
-                        IconBadge(name: "plus")
+                        RoundedIcon(name: "minus"){
+                            viewModel.decreaseQuantity()
+                        }
+                        
+                        Text("\(viewModel.quantity)")
+                            .frame(width: 24)
+                        
+                        RoundedIcon(name: "plus"){
+                            viewModel.increaseQuantity()
+                        }
                     }
+                    .padding(.horizontal)
                 }
                 
                 
@@ -117,7 +135,7 @@ struct ProductDetail: View {
                     .frame(maxWidth: .infinity)
                     .padding()
                     .foregroundStyle(.white)
-                    .background(.blue)
+                    .background(.primary)
                     .clipShape(RoundedRectangle(cornerRadius: 16))
                      
                 }
@@ -125,6 +143,7 @@ struct ProductDetail: View {
             }
             .padding(.horizontal)
         }
+        .tint(.primary)
     }
 }
 

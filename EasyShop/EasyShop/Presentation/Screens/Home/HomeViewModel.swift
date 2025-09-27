@@ -33,4 +33,9 @@ class HomeViewModel: ObservableObject {
         favoriteProducts.append(product)
     }
     
+    func removeFavoriteProduct(indexSet: IndexSet) {
+        favoriteProducts.remove(atOffsets: indexSet)
+        
+    }
+    
 }

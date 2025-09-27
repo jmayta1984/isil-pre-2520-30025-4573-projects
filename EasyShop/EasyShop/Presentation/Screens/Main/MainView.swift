@@ -19,7 +19,7 @@ struct MainView: View {
             }
             
             Tab("Favorites", systemImage: "heart") {
-                
+                FavoriteView()
             }
             
             Tab("Cart", systemImage: "cart") {

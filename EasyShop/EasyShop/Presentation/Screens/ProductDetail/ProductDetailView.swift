@@ -11,7 +11,9 @@ struct ProductDetailView: View {
     let product: Product
     
     @StateObject var viewModel = ProductDetailViewModel()
+    
     @EnvironmentObject var cartViewModel: CartViewModel
+    @EnvironmentObject var homeViewModel: HomeViewModel
     
     @State var isFavorite = false
     @State var selectedSize: String? = nil
@@ -37,6 +39,7 @@ struct ProductDetailView: View {
                         }
                     Button {
                         isFavorite.toggle()
+                        homeViewModel.addFavoriteProduct(product: product)
                     } label: {
                         Image(systemName: isFavorite ? "heart.fill" : "heart")
                             .font(.title2)
@@ -162,6 +165,3 @@ struct ProductDetailView: View {
     }
 }
 
-#Preview {
-    ProductDetailView(product: products[0])
-}

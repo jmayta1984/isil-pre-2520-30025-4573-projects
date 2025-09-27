@@ -13,6 +13,7 @@ struct HomeView: View {
     @State var selectedCategory: Category = .all
     @State var selectedProduct: Product? = nil
     
+    @EnvironmentObject var viewModel: HomeViewModel
     
     var body: some View {
         
@@ -104,7 +105,7 @@ struct HomeView: View {
                     GridItem(.flexible()),
                     GridItem(.flexible())
                 ]) {
-                    ForEach(products) { product in
+                    ForEach(viewModel.products) { product in
                         ProductCard(product: product)
                             .background(.ultraThinMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 16))
@@ -122,10 +123,6 @@ struct HomeView: View {
     }
     
 }
-
-
-
-
 
 
 enum Category: String, CaseIterable {

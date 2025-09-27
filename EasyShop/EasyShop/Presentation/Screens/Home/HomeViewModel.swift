@@ -27,6 +27,10 @@ class HomeViewModel: ObservableObject {
                 sizes: ["7.0", "7.5", "8.0", "8.5", "9.0"])
     ]
     
+    @Published var favoriteProducts:[Product] = []
     
+    func addFavoriteProduct(product: Product) {
+        favoriteProducts.append(product)
+    }
     
 }

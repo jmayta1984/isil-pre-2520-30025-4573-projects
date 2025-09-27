@@ -17,6 +17,7 @@ struct ProductDetailView: View {
     
     @State var isFavorite = false
     @State var selectedSize: String? = nil
+    @State var showMessage = false
     
     var body: some View {
         VStack {
@@ -124,6 +125,7 @@ struct ProductDetailView: View {
                 Button(action: {
                     
                     guard let size = selectedSize else { return }
+                    showMessage.toggle()
                     
                     cartViewModel.addCartItem(
                         product: product,
@@ -160,6 +162,60 @@ struct ProductDetailView: View {
 
             }
             .padding(.horizontal)
+        }
+        .sheet(isPresented: $showMessage){
+            VStack {
+                Text("ADDED TO CART").font(.title2).bold()
+            
+                HStack {
+                    AsyncImage(
+                        url: URL(string: product.image),
+                        content: { image in
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 96)
+                                .frame(height: 96)
+                            
+                            
+                        }) {
+                            ProgressView()
+                                .frame(width: 96)
+                                .frame(height: 96)
+                        }
+                    VStack (alignment: .leading){
+                        Text("\(product.price, specifier: "%.2f")")
+                            .padding(.horizontal, 8)
+                            .background(.black)
+                            .foregroundStyle(.white)
+                        Text(product.name).font(.subheadline)
+                    }
+                    Spacer()
+                    
+                    
+                }
+                
+                
+                Button(action: {
+                  
+                }) {
+                    NavigationLink  {
+                        CartView()
+                    } label: {
+                        Text("View cart")
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(.black)
+                            .foregroundStyle(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 16))
+                            .padding(.horizontal, 8)
+                    }
+                    
+                    
+                }
+
+            }
+            .presentationDetents([.fraction(0.30)])
         }
         .tint(.primary)
     }

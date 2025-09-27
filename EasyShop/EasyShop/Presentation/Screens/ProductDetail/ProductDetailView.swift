@@ -11,8 +11,10 @@ struct ProductDetailView: View {
     let product: Product
     
     @StateObject var viewModel = ProductDetailViewModel()
+    @EnvironmentObject var cartViewModel: CartViewModel
     
     @State var isFavorite = false
+    @State var selectedSize: String? = nil
     
     var body: some View {
         VStack {
@@ -77,8 +79,13 @@ struct ProductDetailView: View {
                                 Text(size)
                                     .padding(.horizontal)
                                     .padding(.vertical, 8)
-                                    .background(.ultraThinMaterial)
+                                    .background(
+                                        size == selectedSize ? .black : .gray.opacity(0.1))
+                                    .foregroundStyle(size == selectedSize ? .white : .black)
                                     .clipShape(RoundedRectangle(cornerRadius: 16))
+                                    .onTapGesture {
+                                        selectedSize = size
+                                    }
                             }
                         }
                         .padding(.horizontal)
@@ -111,7 +118,15 @@ struct ProductDetailView: View {
             
             
             HStack {
-                Button(action: {}) {
+                Button(action: {
+                    
+                    guard let size = selectedSize else { return }
+                    
+                    cartViewModel.addCartItem(
+                        product: product,
+                        size: size,
+                        quantity: viewModel.quantity)
+                }) {
                     HStack {
                         Image(systemName: "plus.square")
                         Text("Add to cart")

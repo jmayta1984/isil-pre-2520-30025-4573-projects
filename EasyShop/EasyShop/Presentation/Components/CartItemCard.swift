@@ -49,6 +49,3 @@ struct CartItemCard: View {
     }
 }
 
-#Preview {
-    CartItemCard(cartItem: cartItems[0])
-}

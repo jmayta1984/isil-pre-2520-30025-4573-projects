@@ -13,6 +13,7 @@ struct HomeView: View {
     @State var selectedCategory: Category = .all
     @State var selectedProduct: Product? = nil
     
+    
     var body: some View {
         
         VStack {
@@ -119,6 +120,7 @@ struct HomeView: View {
             ProductDetailView(product: product)
         }
     }
+    
 }
 
 

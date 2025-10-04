@@ -14,6 +14,9 @@ struct ProductDetailView: View {
     
     @EnvironmentObject var cartViewModel: CartViewModel
     @EnvironmentObject var homeViewModel: HomeViewModel
+    @EnvironmentObject var mainViewModel: MainViewModel
+    
+    @Environment(\.dismiss) var dismiss
     
     @State var isFavorite = false
     @State var selectedSize: String? = nil
@@ -49,15 +52,15 @@ struct ProductDetailView: View {
                             .clipShape(Circle())
                             .padding(8)
                     }
-
                     
-
+                    
+                    
                 }
                 .background(.ultraThinMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
                 .padding(.horizontal)
-            
-
+                
+                
                 
                 HStack {
                     Text(product.name)
@@ -67,6 +70,23 @@ struct ProductDetailView: View {
                         .font(.headline)
                 }
                 .padding()
+                
+                
+                
+                HStack {
+                    Spacer()
+                    RoundedIcon(name: "minus"){
+                        viewModel.decreaseQuantity()
+                    }
+                    
+                    Text("\(viewModel.quantity)")
+                        .frame(width: 24)
+                    
+                    RoundedIcon(name: "plus"){
+                        viewModel.increaseQuantity()
+                    }
+                }
+                .padding(.horizontal)
                 
                 HStack {
                     Text("Select size")
@@ -93,24 +113,12 @@ struct ProductDetailView: View {
                             }
                         }
                         .padding(.horizontal)
-
-                    }
-                    Spacer()
-                    HStack {
-                        RoundedIcon(name: "minus"){
-                            viewModel.decreaseQuantity()
-                        }
                         
-                        Text("\(viewModel.quantity)")
-                            .frame(width: 24)
-                        
-                        RoundedIcon(name: "plus"){
-                            viewModel.increaseQuantity()
-                        }
                     }
-                    .padding(.horizontal)
+                    
                 }
                 
+             
                 
                 HStack {
                     Text("Description")
@@ -150,23 +158,23 @@ struct ProductDetailView: View {
                     HStack {
                         Image(systemName: "cart")
                         Text("Buy now")
-                           
+                        
                     }
                     .frame(maxWidth: .infinity)
                     .padding()
                     .foregroundStyle(.white)
                     .background(.primary)
                     .clipShape(RoundedRectangle(cornerRadius: 16))
-                     
+                    
                 }
-
+                
             }
             .padding(.horizontal)
         }
         .sheet(isPresented: $showMessage){
             VStack {
                 Text("ADDED TO CART").font(.title2).bold()
-            
+                
                 HStack {
                     AsyncImage(
                         url: URL(string: product.image),
@@ -197,23 +205,22 @@ struct ProductDetailView: View {
                 
                 
                 Button(action: {
-                  
+                    showMessage.toggle()
+                    dismiss()
+                    mainViewModel.selectedTab = 2
                 }) {
-                    NavigationLink  {
-                        CartView()
-                    } label: {
-                        Text("View cart")
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(.black)
-                            .foregroundStyle(.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 16))
-                            .padding(.horizontal, 8)
-                    }
                     
+                    Text("View cart")
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(.black)
+                        .foregroundStyle(.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                        .padding(.horizontal, 8)
                     
-                }
 
+                }
+                
             }
             .presentationDetents([.fraction(0.30)])
         }

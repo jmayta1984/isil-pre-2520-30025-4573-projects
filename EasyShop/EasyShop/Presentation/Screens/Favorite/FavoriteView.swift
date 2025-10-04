@@ -9,15 +9,15 @@ import SwiftUI
 
 struct FavoriteView: View {
     
-    @EnvironmentObject var homeViewModel: HomeViewModel
+    @EnvironmentObject var viewModel: FavoriteViewModel
     
     var body: some View {
         List {
-            ForEach(homeViewModel.favoriteProducts) { product in
+            ForEach(viewModel.favoriteProducts) { product in
                 ProductCard(product: product)
             }
             .onDelete { indexSet in
-                homeViewModel.removeFavoriteProduct(indexSet: indexSet)
+                viewModel.removeFavoriteProduct(indexSet: indexSet)
             }
         }.listStyle(.plain)
     }

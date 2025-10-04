@@ -10,13 +10,13 @@ import SwiftUI
 @main
 struct EasyShopApp: App {
     @StateObject var cartViewModel = CartViewModel()
-    @StateObject var homeViewModel = HomeViewModel()
+    @StateObject var favoriteViewModel = FavoriteViewModel()
     @StateObject var mainViewModel = MainViewModel()
     var body: some Scene {
         WindowGroup {
             LoginView()
                 .environmentObject(cartViewModel)
-                .environmentObject(homeViewModel)
+                .environmentObject(favoriteViewModel)
                 .environmentObject(mainViewModel)
         }
     }

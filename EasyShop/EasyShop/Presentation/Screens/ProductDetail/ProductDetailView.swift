@@ -13,7 +13,7 @@ struct ProductDetailView: View {
     @StateObject var viewModel = ProductDetailViewModel()
     
     @EnvironmentObject var cartViewModel: CartViewModel
-    @EnvironmentObject var homeViewModel: HomeViewModel
+    @EnvironmentObject var favoriteViewModel: FavoriteViewModel
     @EnvironmentObject var mainViewModel: MainViewModel
     
     @Environment(\.dismiss) var dismiss
@@ -43,7 +43,7 @@ struct ProductDetailView: View {
                         }
                     Button {
                         isFavorite.toggle()
-                        homeViewModel.addFavoriteProduct(product: product)
+                        favoriteViewModel.addFavoriteProduct(product: product)
                     } label: {
                         Image(systemName: isFavorite ? "heart.fill" : "heart")
                             .font(.title2)

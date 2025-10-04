@@ -13,7 +13,7 @@ struct HomeView: View {
     @State var selectedCategory: Category = .all
     @State var selectedProduct: Product? = nil
     
-    @EnvironmentObject var viewModel: HomeViewModel
+    @StateObject var viewModel = HomeViewModel()
     
     var body: some View {
         

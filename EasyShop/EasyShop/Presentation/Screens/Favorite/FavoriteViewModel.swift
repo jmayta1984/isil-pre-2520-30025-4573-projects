@@ -10,12 +10,13 @@ import Foundation
 class FavoriteViewModel: ObservableObject {
     @Published var favoriteProducts:[Product] = []
     
-    func addFavoriteProduct(product: Product) {
-        favoriteProducts.append(product)
+    func toggleFavorite(product: Product) {
+        if let index = favoriteProducts.firstIndex(where: { $0.id == product.id  }) {
+            favoriteProducts.remove(at: index)
+        } else  {
+            favoriteProducts.append(product)
+        }
     }
     
-    func removeFavoriteProduct(indexSet: IndexSet) {
-        favoriteProducts.remove(atOffsets: indexSet)
-        
-    }
+  
 }

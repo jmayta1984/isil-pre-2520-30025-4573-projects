@@ -16,14 +16,20 @@ struct CartView: View {
             VStack {
                 
                 List{
-                    ForEach(viewModel.cartItems, id: \.self.product.id) { cartItem in
+                    ForEach(viewModel.cartItems, id: \.self) { cartItem in
                         CartItemCard(cartItem: cartItem)
+                            .swipeActions(edge: .trailing) {
+                                Button(role: .destructive) {
+                                    viewModel.removeCartItem(cartItem: cartItem)
+                                } label: {
+                                    Label("Remove", systemImage: "trash")
+                                }
+
+                            }
                             
                             
                     }
-                    .onDelete { indexSet in
-                        viewModel.removeCartItem(indexSet: indexSet)
-                    }
+                  
                     .listRowSeparator(.hidden)
                     
                 }

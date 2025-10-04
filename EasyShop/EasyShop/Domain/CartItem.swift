@@ -5,10 +5,10 @@
 //  Created by Alumno on 19/09/25.
 //
 
-struct CartItem {
+struct CartItem: Hashable {
     let product: Product
     let size: String
-    let quantity: Int
+    var quantity: Int
 }
 
 

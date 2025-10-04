@@ -18,7 +18,6 @@ struct ProductDetailView: View {
     
     @Environment(\.dismiss) var dismiss
     
-    @State var isFavorite = false
     @State var selectedSize: String? = nil
     @State var showMessage = false
     
@@ -42,10 +41,10 @@ struct ProductDetailView: View {
                                 .frame(height: 256)
                         }
                     Button {
-                        isFavorite.toggle()
-                        favoriteViewModel.addFavoriteProduct(product: product)
+                        favoriteViewModel.toggleFavorite(product: product)
                     } label: {
-                        Image(systemName: isFavorite ? "heart.fill" : "heart")
+                        Image(systemName: favoriteViewModel.favoriteProducts.contains(where: { $0.id == product.id
+                        }) ? "heart.fill" : "heart")
                             .font(.title2)
                             .padding(8)
                             .background(.background)

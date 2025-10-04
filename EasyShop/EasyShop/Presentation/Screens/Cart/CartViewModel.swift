@@ -12,11 +12,19 @@ class CartViewModel: ObservableObject {
     @Published var cartItems:[CartItem] = []
     
     func addCartItem(product: Product, size: String, quantity: Int){
-        let cartItem = CartItem(product: product, size: size, quantity: quantity)
-        cartItems.append(cartItem)
+        if let index = cartItems.firstIndex(where: { ($0.product.id == product.id) && ($0.size == size) }) {
+            cartItems[index].quantity += quantity
+        } else {
+            let cartItem = CartItem(product: product, size: size, quantity: quantity)
+            cartItems.append(cartItem)
+        }
+        
+        
     }
     
-    func removeCartItem(indexSet: IndexSet){
-        cartItems.remove(atOffsets: indexSet)
+    func removeCartItem(cartItem: CartItem){
+        if let index = cartItems.firstIndex(where: { ($0.product.id == cartItem.product.id) && ($0.size == cartItem.size) }) {
+            cartItems.remove(at: index)
+        }
     }
 }

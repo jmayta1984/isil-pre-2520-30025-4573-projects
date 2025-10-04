@@ -15,10 +15,16 @@ struct FavoriteView: View {
         List {
             ForEach(viewModel.favoriteProducts) { product in
                 ProductCard(product: product)
+                    .swipeActions(edge: .trailing) {
+                        Button(role: .destructive) {
+                            viewModel.toggleFavorite(product: product)
+                        } label: {
+                            Label("Remove", systemImage: "trash")
+                        }
+
+                    }
             }
-            .onDelete { indexSet in
-                viewModel.removeFavoriteProduct(indexSet: indexSet)
-            }
+        
         }.listStyle(.plain)
     }
 }

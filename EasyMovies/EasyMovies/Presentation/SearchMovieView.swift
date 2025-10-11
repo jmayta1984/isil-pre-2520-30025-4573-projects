@@ -11,10 +11,15 @@ struct SearchMovieView: View {
     @StateObject var viewModel = SearchMovieViewModel()
     
     var body: some View {
-        ScrollView {
+        VStack {
             HStack {
                 Image(systemName: "magnifyingglass")
                 TextField("Search any movies", text: $viewModel.query)
+                    .onSubmit {
+                        viewModel.searchMovie()
+                    }
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
             }
             .padding(.horizontal)
             
@@ -23,8 +28,11 @@ struct SearchMovieView: View {
                     MovieCard(movie: movie)
                 }
             }
+            .listStyle(.plain)
             
         }
+        
+        
     }
 }
 

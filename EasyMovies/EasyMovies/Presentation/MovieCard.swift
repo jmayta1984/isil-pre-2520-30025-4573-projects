@@ -16,7 +16,7 @@ struct MovieCard: View {
             MovieImage(path: movie.posterPath)
             VStack {
                 Text(movie.title).lineLimit(1)
-                Text(movie.overView).lineLimit(2)
+                Text(movie.overview).lineLimit(2)
             }
         }
     }

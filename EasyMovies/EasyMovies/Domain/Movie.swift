@@ -8,6 +8,6 @@
 struct Movie: Identifiable {
     let id: Int
     let title: String
-    let overView: String
+    let overview: String
     let posterPath: String
 }

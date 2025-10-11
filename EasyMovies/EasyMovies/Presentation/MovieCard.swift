@@ -12,13 +12,14 @@ struct MovieCard: View {
     
     var body: some View {
         
-        HStack {
+        HStack (alignment: .top) {
             MovieImage(path: movie.posterPath)
-            VStack {
-                Text(movie.title).lineLimit(1)
+            VStack(alignment: .leading) {
+                Text(movie.title).bold().lineLimit(1)
                 Text(movie.overview).lineLimit(2)
             }
         }
+        .frame(height: 136)
     }
 }
 
@@ -30,13 +31,14 @@ struct MovieImage: View {
         AsyncImage(url: URL(string: path)) { image in
             image
                 .resizable()
-                .frame(height: 120)
-                .frame(width: 60)
-                .clipShape(RoundedRectangle(cornerRadius: 16))
+                .scaledToFill()
+                .frame(height: 136)
+                .frame(width: 90)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
         } placeholder: {
             ProgressView()
-                .frame(height: 120)
-                .frame(width: 60)
+                .frame(height: 136)
+                .frame(width: 90)
         }
 
     }

@@ -13,7 +13,7 @@ class ProductService {
     
     private init(){}
     
-    func getAllProducts(completion: @escaping ([Product]?, String? ) -> Void ) {
+    func getAllProducts(completion: @escaping ([Product]?, String?) -> Void ) {
         
         let urlString = "https://dummyjson.com/products"
         guard let url = URL(string: urlString) else {

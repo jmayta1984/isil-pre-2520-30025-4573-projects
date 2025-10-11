@@ -1,3 +1,7 @@
 
+*.xcuserestate
+xcuserdata/
+**/xcuserdata/
+**/xcshareddata/
 .DS_Store
 

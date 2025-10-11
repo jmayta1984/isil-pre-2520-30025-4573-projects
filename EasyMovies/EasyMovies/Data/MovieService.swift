@@ -47,11 +47,22 @@ class MovieService {
             do {
                 let wrapperDto = try JSONDecoder().decode(MoviesWrapperDto.self, from: data)
                 
+                let originalFormat = DateFormatter()
+                originalFormat.dateFormat = "yyyy-mm-dd"
+                
+                let outputFormat = DateFormatter()
+                outputFormat.dateFormat = "MMM dd, yyyy"
+                
                 let movies = wrapperDto.movies.map { movieDto in
                     Movie(id: movieDto.id,
                           title: movieDto.title,
                           overview: movieDto.overview,
-                          posterPath: "https://image.tmdb.org/t/p/w500\(movieDto.posterPath ?? "")")
+                          posterPath: "https://image.tmdb.org/t/p/w500\(movieDto.posterPath ?? "")",
+                          releaseDate:
+                            
+                            outputFormat.string(from: originalFormat.date(from: movieDto.releaseDate) ?? Date())
+                            
+                    )
                 }
                 completion(movies, nil)
 

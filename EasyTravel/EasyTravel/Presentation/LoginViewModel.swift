@@ -18,6 +18,11 @@ class LoginViewModel: ObservableObject {
     func signin(){
         let service = AuthService.shared
         
+        service.signin(requestDto: LoginRequestDto(email: email, password: password)) { success, message in
+            DispatchQueue.main.async {
+                self.message = message
+            }
+        }
     }
 }
         

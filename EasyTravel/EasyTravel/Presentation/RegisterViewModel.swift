@@ -15,6 +15,8 @@ class RegisterViewModel: ObservableObject {
     @Published var password = ""
     
     @Published var message = ""
+    @Published var showAlert = false
+    @Published var success = false
     
     func register(){
         let service = AuthService.shared
@@ -23,6 +25,8 @@ class RegisterViewModel: ObservableObject {
             
             DispatchQueue.main.async {
                 self.message = message
+                self.success = success
+                self.showAlert.toggle()
             }
         }
         

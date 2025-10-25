@@ -11,7 +11,9 @@ struct RegisterView: View {
     
     @StateObject var viewModel = RegisterViewModel()
 
+    @Environment(\.dismiss) var dismiss
     @State var isVisible = false
+    
     
     var body: some View {
         VStack(spacing: 16) {
@@ -74,13 +76,21 @@ struct RegisterView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 32))
                     .padding(.horizontal)
             }
-            Group {
-                if !viewModel.email.isEmpty {
-                    Text(viewModel.message)
-                }
-            }
+       
             
         }
+        .alert("Message", isPresented: $viewModel.showAlert) {
+            Button(action: {
+                if (viewModel.success) {
+                    dismiss()
+                }
+            }) {
+                Text("OK")
+            }
+        } message: {
+            Text(viewModel.message)
+        }
+
     }
 }
 

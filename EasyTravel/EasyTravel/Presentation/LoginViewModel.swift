@@ -14,13 +14,15 @@ class LoginViewModel: ObservableObject {
     @Published var password = ""
     
     @Published var message = ""
+    @Published var user: User?
     
     func signin(){
         let service = AuthService.shared
         
-        service.signin(requestDto: LoginRequestDto(email: email, password: password)) { success, message in
+        service.signin(requestDto: LoginRequestDto(email: email, password: password)) { user, message in
             DispatchQueue.main.async {
                 self.message = message
+                self.user = user
             }
         }
     }

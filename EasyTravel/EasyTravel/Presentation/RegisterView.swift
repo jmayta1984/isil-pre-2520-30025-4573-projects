@@ -9,15 +9,13 @@ import SwiftUI
 
 struct RegisterView: View {
     
-    @State var firstName = ""
-    @State var lastName = ""
-    @State var email = ""
-    @State var password = ""
+    @StateObject var viewModel = RegisterViewModel()
+
     @State var isVisible = false
     
     var body: some View {
         VStack(spacing: 16) {
-            TextField("First name", text: $firstName)
+            TextField("First name", text: $viewModel.firstName)
                 .autocorrectionDisabled()
                 .padding()
                 .frame(height: 52)
@@ -25,7 +23,7 @@ struct RegisterView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 16))
                 .padding(.horizontal)
             
-            TextField("Last name", text: $lastName)
+            TextField("Last name", text: $viewModel.lastName)
                 .autocorrectionDisabled()
                 .padding()
                 .frame(height: 52)
@@ -33,7 +31,7 @@ struct RegisterView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 16))
                 .padding(.horizontal)
             
-            TextField("Email", text: $email)
+            TextField("Email", text: $viewModel.email)
                 .autocorrectionDisabled()
                 .padding()
                 .frame(height: 52)
@@ -44,18 +42,18 @@ struct RegisterView: View {
             HStack {
                 Group {
                     if isVisible {
-                        TextField("Password", text: $password)
+                        TextField("Password", text: $viewModel.password)
                             .autocorrectionDisabled()
                             .textInputAutocapitalization(.never)
                     } else {
-                        SecureField("Password", text: $password)
+                        SecureField("Password", text: $viewModel.password)
                     }
                 }
                 
                 Button {
                     isVisible.toggle()
                 } label: {
-                    Image(systemName: isVisible ? "eye.slash" : "eye")
+                    Image(systemName: isVisible ? "eye" : "eye.slash")
                         .tint(Color(uiColor: .label))
                 }
             }
@@ -66,6 +64,7 @@ struct RegisterView: View {
             .padding(.horizontal)
             
             Button {
+                viewModel.register()
             } label: {
                 Text("Register")
                     .padding()
@@ -74,6 +73,11 @@ struct RegisterView: View {
                     .foregroundStyle(Color(uiColor: .systemBackground))
                     .clipShape(RoundedRectangle(cornerRadius: 32))
                     .padding(.horizontal)
+            }
+            Group {
+                if !viewModel.email.isEmpty {
+                    Text(viewModel.message)
+                }
             }
             
         }

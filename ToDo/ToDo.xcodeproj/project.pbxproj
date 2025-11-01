@@ -85,7 +85,7 @@
 					};
 				};
 			};
-			buildConfigurationList = FBE9B2B32EB58DE700AB5828 /* Build configuration list for PBXProject "ToDoApp" */;
+			buildConfigurationList = FBE9B2B32EB58DE700AB5828 /* Build configuration list for PBXProject "ToDo" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -303,7 +303,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FBE9B2B32EB58DE700AB5828 /* Build configuration list for PBXProject "ToDoApp" */ = {
+		FBE9B2B32EB58DE700AB5828 /* Build configuration list for PBXProject "ToDo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FBE9B2C92EB58DE800AB5828 /* Debug */,

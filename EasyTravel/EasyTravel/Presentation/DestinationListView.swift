@@ -9,7 +9,6 @@ import SwiftUI
 
 struct DestinationListView: View {
     @StateObject var viewModel = DestinationListViewModel()
-    @EnvironmentObject var appRouterViewModel: AppRouterViewModel
     
     var body: some View {
         
@@ -43,14 +42,7 @@ struct DestinationListView: View {
             
             .navigationTitle("Destinations")
             .navigationBarBackButtonHidden()
-            .toolbar {
-                Button {
-                    appRouterViewModel.logout()
-                } label: {
-                    Text("Logout")
-                }
-
-            }
+            
         }
     }
 }

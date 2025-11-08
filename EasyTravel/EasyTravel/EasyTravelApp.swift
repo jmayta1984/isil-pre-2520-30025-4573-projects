@@ -9,12 +9,14 @@ import SwiftUI
 
 @main
 struct EasyTravelApp: App {
-    @StateObject var viewModel = AppRouterViewModel()
+    @StateObject var appRouterViewModel = AppRouterViewModel()
+    @StateObject var favoriteListViewModel = FavoriteListViewModel()
 
     var body: some Scene {
         WindowGroup {
             AppRouterView()
-                .environmentObject(viewModel)
+                .environmentObject(appRouterViewModel)
+                .environmentObject(favoriteListViewModel)
         }
     }
 }

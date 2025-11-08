@@ -9,10 +9,25 @@ import SwiftUI
 
 struct DestinationCard: View {
     let destination: Destination
+    @EnvironmentObject var favoriteListViewModel: FavoriteListViewModel
     
     var body: some View {
         VStack (alignment: .leading) {
-            DestinationImage(url: destination.posterPath)
+            ZStack (alignment: .topTrailing){
+                DestinationImage(url: destination.posterPath)
+                Button {
+                    favoriteListViewModel.addFavorite(destination: destination)
+                } label: {
+                    Image(systemName: "heart")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                        .scaledToFit()
+                        .padding()
+                }
+                .buttonStyle(.plain)
+                
+
+            }
             VStack  (alignment: .leading){
                 Text(destination.title).font(.headline)
                 Text(destination.overview).font(.subheadline)

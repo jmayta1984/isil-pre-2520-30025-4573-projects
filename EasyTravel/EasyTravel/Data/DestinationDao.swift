@@ -27,7 +27,7 @@ class DestinationDao {
     func delete(id: Int) {
         let request: NSFetchRequest<DestinationEntity>
         request = DestinationEntity.fetchRequest()
-        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        request.predicate = NSPredicate(format: "id == %i", id )
         
         do {
             if let entity = try context.fetch(request).first {

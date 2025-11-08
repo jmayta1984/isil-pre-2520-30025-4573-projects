@@ -15,7 +15,7 @@ struct AppRouterView: View {
         
         Group {
             if viewModel.user != nil {
-                DestinationListView()
+                MainView()
             } else {
                 LoginView()
             }

@@ -13,7 +13,7 @@ struct FavoriteListView: View {
     var body: some View {
         List {
             ForEach(viewModel.favorites) { favorite in
-                DestinationCard(destination: favorite)
+                FavoriteCard(favorite: favorite)
                     .swipeActions {
                         Button(role: .destructive) {
                             viewModel.removeFavorite(destination: favorite)
@@ -22,8 +22,11 @@ struct FavoriteListView: View {
                         }
 
                     }
+                
             }
+            .listRowSeparator(.hidden)
         }
+        .listStyle(.plain)
         .onAppear {
             viewModel.getAllFavorites()
         }

@@ -16,13 +16,16 @@ struct DestinationCard: View {
             ZStack (alignment: .topTrailing){
                 DestinationImage(url: destination.posterPath)
                 Button {
-                    favoriteListViewModel.addFavorite(destination: destination)
+                    favoriteListViewModel.toggleFavorite(destination: destination)
                 } label: {
-                    Image(systemName: "heart")
+                    Image(systemName: favoriteListViewModel.isFavorite(id: destination.id) ? "heart.fill" : "heart" )
                         .resizable()
                         .frame(width: 24, height: 24)
                         .scaledToFit()
-                        .padding()
+                        .padding(8)
+                        .background(Color(uiColor: .systemBackground))
+                        .clipShape(Circle())
+                        .padding(8)
                 }
                 .buttonStyle(.plain)
                 

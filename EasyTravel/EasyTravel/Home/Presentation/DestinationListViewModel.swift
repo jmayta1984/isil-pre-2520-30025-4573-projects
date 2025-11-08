@@ -18,7 +18,7 @@ class DestinationListViewModel: ObservableObject {
         getDestinations()
     }
     
-    private func getDestinations() {
+    func getDestinations() {
         let service = DestinationService.shared
         
         let category = selectedCategory == .all ? "": selectedCategory.rawValue

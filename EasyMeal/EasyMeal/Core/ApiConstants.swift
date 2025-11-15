@@ -8,6 +8,6 @@
 class ApiConstants {
     
     static let baseUrl = "https://www.themealdb.com/api/json/v1/1/"
-    static let categoriesEndpoint = "categories"
+    static let categoriesEndpoint = "categories.php"
     static let mealsEndpoint = "filter.php"
 }

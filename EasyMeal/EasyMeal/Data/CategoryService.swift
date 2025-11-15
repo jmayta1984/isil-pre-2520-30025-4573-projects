@@ -19,6 +19,9 @@ enum ApiError: String, Error {
 
 class CategoryService {
     
+    static let shared = CategoryService()
+    private init() {}
+    
     func getAllCategories(completion: @escaping (Result<[CategoryDto], ApiError >) -> Void ) {
         guard let url = URL(string: ApiConstants.baseUrl) else {
             completion(.failure(.url))
@@ -33,7 +36,7 @@ class CategoryService {
         let session = URLSession.shared
         
         let task = session.dataTask(with: request) { data, response, error in
-            if let error {
+            if error != nil {
                 completion(.failure(.request))
                 return
             }

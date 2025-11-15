@@ -27,6 +27,6 @@ struct CategoriesWrapperDto: Decodable {
 
 extension CategoryDto {
     func toDomain() -> Category {
-        Category(id: self.id, name: self.name, posterPath: self.posterPath)
+        Category(id: self.id, name: self.name, posterPath: self.posterPath, description: self.description)
     }
 }

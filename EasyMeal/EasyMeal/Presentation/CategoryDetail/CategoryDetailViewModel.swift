@@ -20,7 +20,7 @@ class CategoryDetailViewModel: ObservableObject {
                 
             case .success(let meals):
                 self.meals = meals
-            case .failure(let error): break
+            case .failure(let error):
                 self.message = error.rawValue
             }
         }

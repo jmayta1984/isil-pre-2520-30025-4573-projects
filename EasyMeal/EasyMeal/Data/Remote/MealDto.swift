@@ -6,9 +6,9 @@
 //
 
 struct MealDto: Decodable {
-    let id: String
-    let name: String
-    let posterPath: String
+    let id: String?
+    let name: String?
+    let posterPath: String?
     
     enum CodingKeys: String, CodingKey {
         case id = "idMeal"
@@ -24,6 +24,6 @@ struct MealsWrapperDto: Decodable {
 
 extension MealDto {
     func toDomain() -> Meal {
-        Meal(id: self.id, name: self.name, posterPath: self.posterPath)
+        Meal(id: self.id ?? "", name: self.name ?? "", posterPath: self.posterPath ?? "")
     }
 }

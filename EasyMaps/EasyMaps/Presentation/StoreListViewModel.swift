@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Foundation
 
 class StoreListViewModel: ObservableObject {
     @Published var stores: [Store] = []
@@ -16,7 +17,9 @@ class StoreListViewModel: ObservableObject {
         service.getAllStores { result in
             switch result {
             case .success(let stores):
-                self.stores = stores.map({ $0.toDomain() })
+                DispatchQueue.main.async {
+                    self.stores = stores.map({ $0.toDomain() })
+                }
             case .failure:
                 break
                 

@@ -7,7 +7,20 @@
 
 import UserNotifications
 
-class NotificationManager: ObservableObject {
+class NotificationManager: NSObject, ObservableObject, UNUserNotificationCenterDelegate {
+    
+    
+    override init() {
+        super.init()
+        configure()
+    }
+    
+    
+    func configure() {
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
+    }
+    
     
     func requestNotificationPermissions() {
         let center = UNUserNotificationCenter.current()
@@ -32,7 +45,9 @@ class NotificationManager: ObservableObject {
         
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         
-        UNUserNotificationCenter.current().add(request) { error in
+        
+        let center = UNUserNotificationCenter.current()
+        center.add(request) { error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             } else {
@@ -40,5 +55,34 @@ class NotificationManager: ObservableObject {
             }
         }
         
+    }
+    
+    func calendarNotification() {
+        let content = UNMutableNotificationContent()
+        content.title = "Calendar notification"
+        content.body = "This is a calendar notification"
+        content.sound = .defaultCritical
+        
+        var date = DateComponents()
+        date.hour = 20
+        date.minute = 31
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        let center = UNUserNotificationCenter.current()
+        center.add(request) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            } else {
+                print("Schedule notification")
+            }
+        }
+        
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner, .badge, .sound])
     }
 }
